@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - make testclean test
+
+env:
+  matrix:
+    - OS=alpine-3.4
+    - OS=centos-7
+    - OS=debian-8
+    - OS=ubuntu-14.04
