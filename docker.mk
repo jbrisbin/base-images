@@ -59,7 +59,7 @@ distclean:: clean
 		echo "CLEAN $$CONTAINERS"; \
 		docker rm -f $$CONTAINERS >/dev/null; \
 	fi
-	docker rmi $(TAG)
+	if [ -n "$(shell docker images -q -a $(TAG))" ]; then docker rmi $(TAG); fi
 
 clean::
 	rm -f $(DOCKERFILE)
@@ -67,6 +67,7 @@ clean::
 testclean::
 	@for t in $(TESTS); do \
 		TEST_NAME=`basename $$t`; \
+		CONTAINERS="$(shell docker ps -aqf ancestor=$(TAG))"; \
 		export DOCKERFILE=$${TEST_NAME%.mk}-Dockerfile; \
 		$(MAKE) -C test -f $$TEST_NAME distclean; \
 	done
