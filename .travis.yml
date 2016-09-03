@@ -1,10 +1,11 @@
 sudo: required
+language: bash
 
 services:
   - docker
 
 script:
-  - bash -c make -f docker.mk testclean test
+  - make -f docker.mk testclean test
 
 env:
   matrix:
