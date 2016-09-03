@@ -92,9 +92,9 @@ $(DOCKERFILE):: $(DOCKERMK) $(OVERLAY_FILES)
 
 $(DOCKERMK): $(WORKDIR)/.dockermk
 ifneq (x$(DOCKERMK_VERS_CURRENT),x$(DOCKERMK_VERS))
-	echo "Downloading dockermk-`uname -s` utility from GitHub..."
+	@echo "Downloading dockermk-`uname -s` utility from GitHub..."
 	curl -sL -o $(DOCKERMK) https://github.com/jbrisbin/docker.mk/releases/download/$(DOCKERMK_VERS)/dockermk-`uname -s`
-	chmod a+x $(DOCKERMK)
+	@chmod a+x $(DOCKERMK)
 	echo "DOCKERMK_VERS=$(DOCKERMK_VERS)" >$(WORKDIR)/.dockermk;
 endif
 

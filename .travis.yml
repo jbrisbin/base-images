@@ -4,7 +4,7 @@ services:
   - docker
 
 script:
-  - make -f docker.mk testclean test
+  - bash -c make -f docker.mk testclean test
 
 env:
   matrix:
